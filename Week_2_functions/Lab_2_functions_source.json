@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-10T01:55:40.722Z",
+      "source": "https://www.w3schools.com/python/numpy/numpy_array_join.asp",
+      "file": "Week_2_functions/Lab_2_functions.ipynb",
+      "cell": 42,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 59,
+      "sha256": "739ed8ba1c6f85729396b19f80e92375ca96dd46bb4ccb9a08eb0e368d8f93d2",
+      "pastedText": "https://www.w3schools.com/python/numpy/numpy_array_join.asp"
+    }
+  ]
+}
