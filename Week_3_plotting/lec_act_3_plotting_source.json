@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-16T05:09:50.524Z",
+      "source": "w3schools",
+      "file": "Week_3_plotting/lec_act_3_plotting.ipynb",
+      "cell": 15,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 44,
+      "sha256": "4bd779be9e652a9f8b04861bde63aaab3799fc5f7c78e0ea7db077d130ac194d",
+      "pastedText": "https://www.w3schools.com/python/default.asp"
+    },
+    {
+      "timestamp": "2026-10-16T05:10:46.285Z",
+      "source": "matplotlib.org",
+      "file": "Week_3_plotting/lec_act_3_plotting.ipynb",
+      "cell": 15,
+      "position": {
+        "line": 6,
+        "character": 62
+      },
+      "length": 98,
+      "sha256": "6223d3e07a9b0c394acb9563348d2c1e6e0937ba4946583b68c0e0d6e760b3e3",
+      "pastedText": "https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.text.html#matplotlib.axes.Axes.text"
+    }
+  ]
+}

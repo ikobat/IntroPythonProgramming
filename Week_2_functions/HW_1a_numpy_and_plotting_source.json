@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-22T20:51:33.770Z",
+      "source": "stack overflow",
+      "file": "Week_2_functions/HW_1a_numpy_and_plotting.ipynb",
+      "cell": 35,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 72,
+      "sha256": "e7f90e54f28ffb41e4aab983ea7af4a8231c0c804fde70c66a1e6fdf1c6424b9",
+      "pastedText": "https://stackoverflow.com/questions/3877491/deleting-rows-in-numpy-array"
+    },
+    {
+      "timestamp": "2026-10-22T22:32:38.322Z",
+      "source": "stack overflow.com",
+      "file": "Week_2_functions/HW_1a_numpy_and_plotting.ipynb",
+      "cell": 35,
+      "position": {
+        "line": 6,
+        "character": 90
+      },
+      "length": 89,
+      "sha256": "308f3515506fc616283ff4855cac238bb479611165fbc2be916ed8fbcb733be7",
+      "pastedText": "https://stackoverflow.com/questions/40927156/what-is-the-role-of-keepdims-in-numpy-python"
+    }
+  ]
+}

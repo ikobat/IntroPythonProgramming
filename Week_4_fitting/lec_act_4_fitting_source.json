@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-22T06:15:10.329Z",
+      "source": "Scipy",
+      "file": "Week_4_fitting/lec_act_4_fitting.ipynb",
+      "cell": 22,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 80,
+      "sha256": "2e40fe4db8368c71b8284842965f4818d1547a4aa97ea61b1745ad8ec9b69b10",
+      "pastedText": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html"
+    },
+    {
+      "timestamp": "2026-10-22T06:16:13.255Z",
+      "source": "Numpy.org",
+      "file": "Week_4_fitting/lec_act_4_fitting.ipynb",
+      "cell": 22,
+      "position": {
+        "line": 6,
+        "character": 98
+      },
+      "length": 89,
+      "sha256": "a7cfb701f47d049a9998d8b5620954499b72f75c3a7adb4ba9d4320c7af76cb1",
+      "pastedText": "https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.polyfit.html"
+    }
+  ]
+}
