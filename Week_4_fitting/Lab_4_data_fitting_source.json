@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-10-24T05:23:40.336Z",
+      "source": "w3schools",
+      "file": "Week_4_fitting/Lab_4_data_fitting.ipynb",
+      "cell": 32,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 55,
+      "sha256": "1d8772a933877f33ab63280e34f81b29bc20c391122cc66022ccb6093781afa2",
+      "pastedText": "https://www.w3schools.com/python/ref_func_enumerate.asp"
+    },
+    {
+      "timestamp": "2026-10-25T01:34:02.950Z",
+      "source": "matplotlib.org",
+      "file": "Week_4_fitting/Lab_4_data_fitting.ipynb",
+      "cell": 32,
+      "position": {
+        "line": 9,
+        "character": 14
+      },
+      "length": 106,
+      "sha256": "c3c368fccb48a8597669beef071c3171f5deaee0bdd8806c637809f7c44b29ad",
+      "pastedText": "https://matplotlib.org/stable/plot_types/stats/boxplot_plot.html#sphx-glr-plot-types-stats-boxplot-plot-py"
+    }
+  ]
+}
