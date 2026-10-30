@@ -1,3 +1,17 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "timestamp": "2026-10-29T01:23:23.929Z",
+      "source": "w3schools",
+      "file": "Week_5_classes/lec_act_5_classes_and_drawing.ipynb",
+      "cell": 22,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 51,
+      "sha256": "d8c0f759e70bfc86cacff5fc2a699e5a8b67c2afaf6de21377f0793dba36c2ba",
+      "pastedText": "https://www.w3schools.com/python/python_classes.asp"
+    }
+  ]
 }
