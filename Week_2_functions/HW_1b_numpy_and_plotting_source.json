@@ -1,3 +1,43 @@
 {
-  "entries": []
+  "entries": [
+    {
+      "timestamp": "2026-10-30T04:04:53.544Z",
+      "source": "geeksforgeeks.org",
+      "file": "Week_2_functions/HW_1b_numpy_and_plotting.ipynb",
+      "cell": 32,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 62,
+      "sha256": "c9097367b86df7a0c3294bda7872b5b0c0a12d6247b99649054886266170e3fa",
+      "pastedText": "geeksforgeeks.org/python/how-to-set-axis-ranges-in-matplotlib/"
+    },
+    {
+      "timestamp": "2026-10-31T03:39:08.654Z",
+      "source": "https://github.com/OSUrobotics/IntroPythonProgramming/blob/main/Week_2_functions/HW_1b_numpy_and_plotting.ipynb",
+      "file": "Week_2_functions/HW_1b_numpy_and_plotting.ipynb",
+      "cell": 23,
+      "position": {
+        "line": 2,
+        "character": 1
+      },
+      "length": 111,
+      "sha256": "6a06db750c65e9834f550db7406d9a61b580b1363905185965329072a3516ada",
+      "pastedText": "https://github.com/OSUrobotics/IntroPythonProgramming/blob/main/Week_2_functions/HW_1b_numpy_and_plotting.ipynb"
+    },
+    {
+      "timestamp": "2026-10-31T06:08:16.636Z",
+      "source": "w3schools",
+      "file": "Week_2_functions/HW_1b_numpy_and_plotting.ipynb",
+      "cell": 32,
+      "position": {
+        "line": 7,
+        "character": 14
+      },
+      "length": 55,
+      "sha256": "1d8772a933877f33ab63280e34f81b29bc20c391122cc66022ccb6093781afa2",
+      "pastedText": "https://www.w3schools.com/python/ref_func_enumerate.asp"
+    }
+  ]
 }
