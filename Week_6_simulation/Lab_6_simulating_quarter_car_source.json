@@ -1,0 +1,30 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-11-06T00:21:46.068Z",
+      "source": "ME 203 Discord - Software Setup Questions",
+      "file": "Week_6_simulation/Lab_6_simulating_quarter_car.ipynb",
+      "cell": 3,
+      "position": {
+        "line": 15,
+        "character": 1
+      },
+      "length": 124,
+      "sha256": "d28c472844cca98620b107ccd3454eb154db3c8205587ab2eb03e954c99fa8fc",
+      "pastedText": "if str(Path.cwd().parent/\"Week_5_classes\") not in sys.path:\r\n    sys.path.insert(0, str(Path.cwd().parent/\"Week_5_classes\"))"
+    },
+    {
+      "timestamp": "2026-11-06T00:45:00.183Z",
+      "source": "w3schools",
+      "file": "Week_6_simulation/Lab_6_simulating_quarter_car.ipynb",
+      "cell": 32,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 62,
+      "sha256": "9c303ee95aaa26d33e8df0a7d40cf859b11a7ddad9a699f0910e1a84261ae98b",
+      "pastedText": "https://www.w3schools.com/python/scipy/scipy_interpolation.php"
+    }
+  ]
+}

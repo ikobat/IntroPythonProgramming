@@ -133,8 +133,13 @@ def interpolate_road(X_r, Y_r, velocity, dt, start_offset=0, stop_offset=0):
     # GUIDES Lab 6: Copy your interpolate_road body from the lab notebook.
     # GUIDES HW 2a: Use start_offset and stop_offset when building the interpolated X coordinates:
     #   np.arange(X_r[0] + start_offset, X_r[-1] + stop_offset, x_dt)
-    ...
-    # YOUR CODE HERE
+    # dt is in milliseconds, so we convert it to seconds by dividing by 1000.
+    x_dt = velocity * (dt / 1000)
+    # X_c is an np array of the x coordinates spaced out by x_dt which is the change in x based on the change in tame and our velocity
+    X_c = np.arange(0, X_r[-1], x_dt)
+    # np.interp allows us to interpolate a line at specific x coordinates!
+    Y_c = np.interp(X_c, X_r, Y_r)
+    return (X_c, Y_c)
 
 
 class QuarterCar:
@@ -259,14 +264,22 @@ class QuarterCar:
     def A(self):
         """Return the A matrix of the quarter-car state space model (Lab 6)."""
         # GUIDE Lab 6: Return the A matrix in the state system.
-        ...
-        # YOUR CODE HERE
+        return np.array([
+            [0, 1, 0, 0],
+            [(-(self.k_s+self.k_t)/self.m_u),(-self.c_s/self.m_u),(self.k_s/self.m_u),(self.c_s/self.m_u)],
+            [0, 0, 0, 1],
+            [(self.k_s/self.m_s),(self.c_s/self.m_s),(-(self.k_s)/self.m_s),(-(self.c_s)/self.m_s)]
+        ])
 
     def B(self):
         """Return the B matrix of the quarter-car state space model (Lab 6)."""
         # GUIDE Lab 6: Return the B matrix in the state system.
-        ...
-        # YOUR CODE HERE
+        return np.array([
+            [0],
+            [(self.k_t)/(self.m_u)],
+            [0],
+            [0]
+        ])
 
     def C(self):
         """Return the C matrix of the quarter-car state space model (Lab 6)."""
@@ -292,7 +305,8 @@ class QuarterCar:
         sys = StateSpace(self.A(), self.B(), self.C(), self.D())
 
         # GUIDE Lab 6: Use interpolate_road (the copy in this file) to interpolate the road.
-        x_c, y_c = (..., ...)
+        # interpolate_road(X_r, Y_r, velocity, dt)      return (X_c, Y_c)
+        x_c, y_c = (interpolate_road(x_r, y_r, velocity, dt)[0], interpolate_road(x_r, y_r, velocity, dt)[1])
         # YOUR CODE HERE
 
         # We need to translate x_c from an array of positions to an array of timestamps.
