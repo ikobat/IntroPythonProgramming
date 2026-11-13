@@ -136,7 +136,7 @@ def interpolate_road(X_r, Y_r, velocity, dt, start_offset=0, stop_offset=0):
     # dt is in milliseconds, so we convert it to seconds by dividing by 1000.
     x_dt = velocity * (dt / 1000)
     # X_c is an np array of the x coordinates spaced out by x_dt which is the change in x based on the change in tame and our velocity
-    X_c = np.arange(0, X_r[-1], x_dt)
+    X_c = np.arange(X_r[0] + start_offset, X_r[-1] + stop_offset, x_dt)
     # np.interp allows us to interpolate a line at specific x coordinates!
     Y_c = np.interp(X_c, X_r, Y_r)
     return (X_c, Y_c)
@@ -246,20 +246,40 @@ class QuarterCar:
 
         # YOUR CODE HERE
             # Draw the sprung mass, and make it red ('r'). We move the x position to be in the middle of the sprung mass.
-                # Unsprung mass begins at x, with enough width to draw the spring.
-        axs.fill([(x-(0.5*self.w_s)),(x+(0.5*self.w_s)),(x+(0.5*self.w_s)),(x-(0.5*self.w_s))],  # Sprung mass using ysstatic for height
-                 [(y_s),(y_s),(y_s+self.h_s),(y_s+self.h_s)], color='red')
-        axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+                # Unsprung mass begins at x, with enough width to draw the spring directly at x
+        if self.w_s == 0:       # Drawings for the Half Car Model
+            # Drawing of the suspension string
+            draw_spring(axs=axs, width=self.w_ss, height=(y_s - y_u - self.h_u), x=x, y=(y_u + self.h_u))
+            # Drawing of the unsprung mass containing the suspension's spring and damper
+            if self.d_s < 0:       # front quarter car
+                axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+                         [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue')
+            elif self.d_s > 0:     #  back quarter car 
+                axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+                         [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue')
+            else:
+                print("Error: The distance between the suspension spring and damper is zero. Why?")
+        
+            axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
                  [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue') 
-        # Draw the tire spring from the road to the unsprung mass
-        draw_spring(axs=axs, width=self.w_ts, height=(y_u - y_r), x=x, y=y_r)
-        # Drawing of the suspension string
-        # x_ss is the location of the suspension spring at the furthest x position such that the entire spring is over the unsprung mass
-        x_ss = (x-(0.5*self.w_u)) + (0.5 * self.w_ss)
-        draw_spring(axs=axs, width=self.w_ss, height=(y_s - y_u - self.h_u), x=x_ss, y=(y_u + self.h_u))
-        # Draw the damper from the unsprung mass to the sprung mass.
-        draw_damper(axs, x=(x_ss + self.d_s) , y_u=(y_u + self.h_u), y_s=(y_s), width=self.w_c,
-                    height=(self.h_c), rod_u_height=self.h_ru, rod_s_height=self.h_rs)
+
+            # Draw the tire spring from the road to the unsprung mass
+            draw_spring(axs=axs, width=self.w_ts, height=(y_u - y_r), x=x, y=y_r)
+        
+        if self.w_s != 0:
+            axs.fill([(x-(0.5*self.w_s)),(x+(0.5*self.w_s)),(x+(0.5*self.w_s)),(x-(0.5*self.w_s))],  # Sprung mass using ysstatic for height
+                    [(y_s),(y_s),(y_s+self.h_s),(y_s+self.h_s)], color='red')
+            axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+                    [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue') 
+            # Draw the tire spring from the road to the unsprung mass
+            draw_spring(axs=axs, width=self.w_ts, height=(y_u - y_r), x=x, y=y_r)
+            # Drawing of the suspension string where x_ss is the location of the suspension spring 
+            # at the furthest x position such that the entire spring is over the unsprung mass
+            x_ss = (x-(0.5*self.w_u)) + (0.5 * self.w_ss)
+            draw_spring(axs=axs, width=self.w_ss, height=(y_s - y_u - self.h_u), x=x_ss, y=(y_u + self.h_u))
+            # Draw the damper from the unsprung mass to the sprung mass.
+            draw_damper(axs, x=(x_ss + self.d_s) , y_u=(y_u + self.h_u), y_s=(y_s), width=self.w_c,
+                        height=(self.h_c), rod_u_height=self.h_ru, rod_s_height=self.h_rs)
 
     def A(self):
         """Return the A matrix of the quarter-car state space model (Lab 6)."""
