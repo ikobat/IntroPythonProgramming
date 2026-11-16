@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-11-15T20:12:25.417Z",
+      "source": "https://scientific-python.readthedocs.io/",
+      "file": "Week_7_systems/Lab_7_ode_systems.ipynb",
+      "cell": 29,
+      "position": {
+        "line": 6,
+        "character": 14
+      },
+      "length": 136,
+      "sha256": "29e96bb97996ddc3d165dc441a9a04f1af38cfa2660542af85fa793cbc59fa23",
+      "pastedText": "https://scientific-python.readthedocs.io/en/latest/notebooks_rst/3_Ordinary_Differential_Equations/02_Examples/Lotka_Volterra_model.html"
+    }
+  ]
+}

@@ -247,21 +247,25 @@ class QuarterCar:
         # YOUR CODE HERE
             # Draw the sprung mass, and make it red ('r'). We move the x position to be in the middle of the sprung mass.
                 # Unsprung mass begins at x, with enough width to draw the spring directly at x
+    
         if self.w_s == 0:       # Drawings for the Half Car Model
             # Drawing of the suspension string
             draw_spring(axs=axs, width=self.w_ss, height=(y_s - y_u - self.h_u), x=x, y=(y_u + self.h_u))
             # Drawing of the unsprung mass containing the suspension's spring and damper
-            if self.d_s < 0:       # front quarter car
-                axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+            if self.d_s > 0:       # back quarter car
+                axs.fill([(x-(0.5*self.w_ss)),(x+(self.w_u)-(0.5*self.w_ss)), (x+(self.w_u)-(0.5*self.w_ss)), (x-(0.5*self.w_ss))],  # Unsprung mass using yustatic for height
                          [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue')
-            elif self.d_s > 0:     #  back quarter car 
-                axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
+                # Draw the damper behind the suspension spring from the unsprung mass to the sprung mass.
+                draw_damper(axs, x=(x+self.d_s) , y_u=(y_u + self.h_u), y_s=(y_s), width=self.w_c,
+                        height=(self.h_c), rod_u_height=self.h_ru, rod_s_height=self.h_rs)
+            elif self.d_s < 0:     #  front quarter car 
+                axs.fill([(x-(self.w_u)+(0.5*self.w_ss)),(x+(0.5*self.w_ss)), (x+(0.5*self.w_ss)),(x-(self.w_u)+(0.5*self.w_ss))],  # Unsprung mass using yustatic for height
                          [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue')
+                # Draw the damper in front of suspension spring from the unsprung mass to the sprung mass.
+                draw_damper(axs, x=(x+self.d_s) , y_u=(y_u + self.h_u), y_s=(y_s), width=self.w_c,
+                        height=(self.h_c), rod_u_height=self.h_ru, rod_s_height=self.h_rs)
             else:
                 print("Error: The distance between the suspension spring and damper is zero. Why?")
-        
-            axs.fill([(x-(0.5*self.w_u)),(x+(0.5*self.w_u)),(x+(0.5*self.w_u)),(x-(0.5*self.w_u))],  # Unsprung mass using yustatic for height
-                 [(y_u),(y_u),(y_u+self.h_u),(y_u+self.h_u)], color='blue') 
 
             # Draw the tire spring from the road to the unsprung mass
             draw_spring(axs=axs, width=self.w_ts, height=(y_u - y_r), x=x, y=y_r)
@@ -393,10 +397,33 @@ class HalfCar:
         #   - Set w_s to 0 in both the front and back QuarterCar (HalfCar.draw draws the sprung mass instead).
         #   - Set d_s, the distance between the spring and damper in the suspension, to be _negative_ for the
         #     front quarter car (d_s=-d_s). QuarterCar.draw uses this to put the damper in front of the spring.
-        ...
-        # YOUR CODE HERE
+        
+        # not sure if necessary but initializing init parameters
+        self.h_s = h_s
+        self.w_u = w_u
+        self.h_u = h_u
+        self.w_ss = w_ss
+        self.w_ts = w_ts
+        self.w_c = w_c
+        self.h_c = h_c
+        self.h_rs = h_rs
+        self.h_ru = h_ru
+        self.d_s = d_s
+        self.y_s_static = y_s_static
+        self.y_u_static = y_u_static
+
+        # Initializing half car unique parameters 
         self.a_f = a_f
         self.a_b = a_b
+        if front is None:
+            self.front = QuarterCar(m_u=53, k_s=10000, w_s=0, d_s=-d_s)
+        else:
+            front = self.front
+        if back is None:
+            self.back = QuarterCar(m_u=76, k_s=13000, w_s=0)
+        else:
+            back = self.back
+
         # GUIDE HW 2a: Leave Iy hardcoded at 1100 for now so Part 2 runs.
         # GUIDE HW 2b: Replace the hardcoded Iy with an approximation of the car's mass moment of inertia.
         # GUIDES HW 2b: Treat the car as a rod with an evenly distributed mass rotating about its end.
@@ -419,17 +446,18 @@ class HalfCar:
         # GUIDE HW 2a: Draw the sprung mass.
         # HINT: You cannot use draw_rectangle because the sprung mass may be at an angle,
         # and draw_rectangle does not support that. You will need to directly call axs.fill.
-        ...
-        # YOUR CODE HERE
+
+        # drawing of the sprung mass 
+        axs.fill([(x),(x+length),(x+length),(x)], 
+                 [(self.y_s_static + y_sb),(self.y_s_static + y_sf),(self.y_s_static + y_sf + self.h_s),(self.y_s_static + y_sb + self.h_s)], color='red')
 
         self.front.draw(axs=axs, x=x + length, y_s=y_sf, y_u=y_uf, y_r=y_rf)
         self.back.draw(axs=axs, x=x, y_s=y_sb, y_u=y_ub, y_r=y_rb)
-
+                
     def m_s(self):
         """Total sprung mass (front plus back)."""
         # GUIDE HW 2a: Return the sum of the front and back m_s.
-        ...
-        # YOUR CODE HERE
+        return self.front.m_s + self.back.m_s
 
     def A(self):
         """Return the A matrix of the half-car state space model (given)."""
@@ -485,8 +513,16 @@ class HalfCar:
     def B(self):
         """Return the B matrix of the half-car state space model (HW 2a)."""
         # GUIDE HW 2a: Define B.
-        ...
-        # YOUR CODE HERE
+        return np.array([
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [0, 0],
+            [(self.front.k_t / self.front.m_u), 0],
+            [0, (self.back.k_t / self.back.m_u)]
+        ])
 
     def C(self):
         """Return the C matrix of the half-car state space model (given)."""
@@ -528,9 +564,8 @@ class HalfCar:
         #   where each tire starts and stops (see the comment above). Both tires use the same x_r, y_r,
         #   velocity, and dt.
         #   Note: x_rf will never actually be used.
-        x_rb, y_rb = (..., ...)
-        x_rf, y_rf = (..., ...)
-        # YOUR CODE HERE
+        x_rb, y_rb = interpolate_road(x_r, y_r, velocity, dt, start_offset=x_r[0], stop_offset=(x_r[-1]- self.a_f - self.a_b))
+        x_rf, y_rf = interpolate_road(x_r, y_r, velocity, dt, start_offset=(x_r[0] + self.a_f + self.a_b), stop_offset=x_r[-1])
 
         # Input variables are in a matrix where each column is an input variable,
         # and the `i`th row is the value of those input variables at time `time[i]`.
