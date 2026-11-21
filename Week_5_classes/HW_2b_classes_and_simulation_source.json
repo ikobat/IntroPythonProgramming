@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-11-20T05:28:14.025Z",
+      "source": "I accidentally deleted my code",
+      "file": "Week_5_classes/HW_2b_classes_and_simulation.ipynb",
+      "cell": 13,
+      "position": {
+        "line": 5,
+        "character": 1
+      },
+      "length": 760,
+      "sha256": "154f1843e7d58cfb554b27e989732437bfccef99d61d8cb3fb82209ff729263a",
+      "pastedText": "# GUIDES: Write code to calculate and plot the vibration of the non-broken and broken limo. You should use two subplots -- one for each limo -- and fix the axes to be the same.\n# The first plot should be the non-broken limo.\nnrows = 2\nncols = 1\nfig_vib, axs_vib = plt.subplots(nrows, ncols, figsize=(10, 8))\n\nfixed_vibration = stretch_limo_model.y_s + (stretch_limo_model.a_b * stretch_limo_model.theta) - stretch_limo_model.y_rb\nbroken_vibration = broken_model.y_s + (broken_model.a_b * broken_model.theta) - broken_model.y_rb\n\naxs_vib[0,0].plot(stretch_limo_model.time, fixed_vibration, color='blue')\naxs_vib[0,0].set_title('Fixed simulation')\n\naxs_vib[1,0].plot(broken_model.time, broken_vibration, color='blue')\naxs_vib[1,0].set_title('Broken simulation')\n"
+    }
+  ]
+}

@@ -417,20 +417,22 @@ class HalfCar:
         self.a_b = a_b
         if front is None:
             self.front = QuarterCar(m_u=53, k_s=10000, w_s=0, d_s=-d_s)
+            self.Iy = 1100
         else:
-            front = self.front
+            self.front = front
+            self.Iy = (1/3) * (front.m_s + back.m_s) * (self.a_f +self.a_b) ** 2
         if back is None:
             self.back = QuarterCar(m_u=76, k_s=13000, w_s=0)
+            self.Iy = 1100
         else:
-            back = self.back
+            self.back = back
+            self.Iy = (1/3) * (front.m_s + back.m_s) * (self.a_f +self.a_b) ** 2
 
         # GUIDE HW 2a: Leave Iy hardcoded at 1100 for now so Part 2 runs.
         # GUIDE HW 2b: Replace the hardcoded Iy with an approximation of the car's mass moment of inertia.
         # GUIDES HW 2b: Treat the car as a rod with an evenly distributed mass rotating about its end.
         #   The rod's length is the length of the car (a_f + a_b), and its mass is the total sprung mass
         #   (front m_s + back m_s).
-        self.Iy = 1100
-        # YOUR CODE HERE
 
     def draw(self, axs, x, y_rf, y_uf, y_rb, y_ub, y_s, a_f, a_b, theta):
         """
@@ -564,8 +566,8 @@ class HalfCar:
         #   where each tire starts and stops (see the comment above). Both tires use the same x_r, y_r,
         #   velocity, and dt.
         #   Note: x_rf will never actually be used.
-        x_rb, y_rb = interpolate_road(x_r, y_r, velocity, dt, start_offset=x_r[0], stop_offset=(x_r[-1]- self.a_f - self.a_b))
-        x_rf, y_rf = interpolate_road(x_r, y_r, velocity, dt, start_offset=(x_r[0] + self.a_f + self.a_b), stop_offset=x_r[-1])
+        x_rb, y_rb = interpolate_road(x_r, y_r, velocity, dt, start_offset=0, stop_offset=-(self.a_f + self.a_b))
+        x_rf, y_rf = interpolate_road(x_r, y_r, velocity, dt, start_offset=(self.a_f + self.a_b), stop_offset=0)
 
         # Input variables are in a matrix where each column is an input variable,
         # and the `i`th row is the value of those input variables at time `time[i]`.
@@ -604,10 +606,9 @@ class HalfCar:
         # GUIDE HW 2b: Return y_s + (a_b * theta) - y_rb using the values stored on self.
         # GUIDES HW 2b: This is the same calculation you did in the HW 2b notebook (Part 4), but using
         #   self.y_s, self.theta, self.y_rb, and self.a_b.
-        ...
-        # YOUR CODE HERE
-
-
+        delta_sprung_mass = self.y_s + (self.a_b * self.theta) - self.y_rb
+        return delta_sprung_mass
+    
 if __name__ == '__main__':
     # Lab 5: drawing attributes exist on a default QuarterCar
     qc = QuarterCar()
